@@ -121,7 +121,7 @@
             </div>
         </div>
         <div>
-            <button type="submit" class="btn btn-success">Simpan</button>
+            <<button type="submit" class="btn btn-primary">Lanjutkan</button>
         </div>
     </form>
 

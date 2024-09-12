@@ -11,45 +11,44 @@ class AshanlsController extends Controller
 {
     public function index()
     {
-        
+
         $ashanls = Ashanls::with('activity')->get();
         return view('ashanls.index', compact('ashanls'));
     }
 
-    public function create( Activity $activity, Shipment $shipment)
+    public function create(Activity $activity, Shipment $shipment)
     {
         $id = session('id'); // Atau ambil ID dari sumber lain
         // Menampilkan form untuk membuat ROA baru
-        return view('ashanls.create', compact( 'activity', 'shipment', 'id'));
+        return view('ashanls.create', compact('activity', 'shipment', 'id'));
     }
-    
-    public function store(Request $request, Activity $activity,  Shipment $shipment )
+
+    public function store(Request $request)
     {
+        // Validasi data
         $validatedData = $request->validate([
-            'cal' => 'required|string',
-            'si' => 'required|string',
-            'ai' => 'required|string',
-            'fe' => 'required|string',
-            'ca' => 'required|string',
-            'mg' => 'required|string',
-            'na' => 'required|string',
-            'k2' => 'required|string',
-            'ti' => 'required|string',
-            'so' => 'required|string',
-            'mn' => 'required|string',
-            'p2' => 'required|string',
-            'un' => 'required|string',
-            'fofa' => 'required|string',
-            'slafa' => 'required|string',
+            'cal' => 'required|numeric',
+            'si' => 'required|numeric',
+            'ai' => 'required|numeric',
+            'fe' => 'required|numeric',
+            'ca' => 'required|numeric',
+            'mg' => 'required|numeric',
+            'na' => 'required|numeric',
+            'k2' => 'required|numeric',
+            'ti' => 'required|numeric',
+            'so' => 'required|numeric',
+            'mn' => 'required|numeric',
+            'p2' => 'required|numeric',
         ]);
-        $ashanls= new Ashanls($validatedData);
 
-        $ashanls->shipment()->associate($shipment);
-        $ashanls->activity()->associate($activity);
+        // Simpan data ke session
+        session()->put('ash_analysis_data', $validatedData);
 
-        $ashanls->save();
-
-        return redirect()->route('activities.show', $activity->id)->with('success', 'Data berhasil ditambahkan.');
+        // Redirect ke halaman Ash Fusion Temperature
+        return redirect()->route('ashft.create', [
+            'activity' => $request->input('activity_id'),
+            'shipment' => $request->input('shipment_id')
+        ]);
     }
 
     public function edit(Ashanls $ashanls)
@@ -84,6 +83,4 @@ class AshanlsController extends Controller
 
         return redirect()->route('activities.show', $ashanls->activity_id)->with('success', 'Ash Analysis berhasil diperbarui.');
     }
-
-    
 }
