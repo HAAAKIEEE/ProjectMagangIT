@@ -475,8 +475,8 @@
                                 <td>{{ $ashft->ft1 }}</td>
                                 <td>
                                     <!-- Add action buttons here -->
-                                    <a href="{{ route('ashft.create', ['activity' => $activity->id, 'shipment' => $shipment->id]) }}" class="btn btn-primary">Create Ashft</a>
-                                    <a href="{{ route('ashfts.edit', $ashft->id) }}"
+                                    <a href="{{ route('ashfts.create', ['activity' => $activity->id, 'shipment' => $shipment->id]) }}" class="btn btn-primary">Create Ashft</a>
+                                    <a href="{{ route('ashfts.edit', [ 'activity' => $activity->id,'shipment' => $shipment->id ,'ashft'=>$ashft->id] ) }}"
                                         class="btn btn-warning btn-sm">Edit</a>
                                     <form action="{{ route('ashfts.destroy', $ashft->id) }}" method="POST"
                                         style="display:inline;">

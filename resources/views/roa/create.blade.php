@@ -5,9 +5,6 @@
         <h1>Tambah Report Of Analysis</h1>
         <form action="{{ route('roa.store', ['activity' => $activity->id, 'shipment' => $shipment->id]) }}" method="POST">
             @csrf
-
-
-
             <style>
                 .form-group {
                     margin-bottom: 15px;

@@ -105,8 +105,9 @@ Route::put('/Ash/{ashanls}', [AshanlsController::class, 'update'])->name('ashanl
 // ashft
 
 Route::resource('ashfts', AshftController::class);
-Route::resource('activities/{activity}/shipments/{shipment}/ashfts', AshftController::class)->except(['create', 'store', 'edit', 'update']);
+// Route::resource('activities/{activity}/shipments/{shipment}/ashfts', AshftController::class)->except(['show']);
 // Rute khusus untuk create, store, edit, update
+// http://projectmagangit.test/activities/2/shipments/3/ashanls/create
 Route::get('activities/{activity}/shipments/{shipment}/ashfts/create', [AshftController::class, 'create'])->name('ashfts.create');
 Route::post('activities/{activity}/shipments/{shipment}/ashfts', [AshftController::class, 'store'])->name('ashfts.store');
 Route::get('activities/{activity}/shipments/{shipment}/ashfts/{ashft}/edit', [AshftController::class, 'edit'])->name('ashfts.edit');

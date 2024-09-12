@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Tambah Ash Analysis</h1>
+    <h1>Tambah Ash Analysis  ttt</h1>
     <form action="{{ route('ashanls.store',['activity'=>$activity->id, 'shipment'=>$shipment->id]) }}" method="POST">
         @csrf
 
