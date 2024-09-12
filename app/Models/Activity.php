@@ -34,5 +34,8 @@ class Activity extends Model
         return $this->hasMany(Ashanls::class);
     }
 
-    
+    public function ashfts()
+    {
+        return $this->hasMany(Ashft::class); // atau relasi yang sesuai
+    }
 }

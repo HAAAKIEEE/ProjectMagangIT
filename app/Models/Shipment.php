@@ -43,7 +43,7 @@ class Shipment extends Model
         'company_id',
         'tg',
         'sv',
-        'activity_id' 
+        'activity_id'
     ];
 
     // Accessor to calculate duration
@@ -83,5 +83,10 @@ class Shipment extends Model
     public function ashanls()
     {
         return $this->hasMany(Ashanls::class);
+    }
+
+    public function ashfts()
+    {
+        return $this->hasMany(Ashft::class);
     }
 }

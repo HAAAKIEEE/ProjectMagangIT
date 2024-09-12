@@ -12,6 +12,8 @@ use App\Http\Controllers\RoaController;
 use App\Http\Controllers\CoaController;
 use App\Http\Controllers\AshanlsController;
 use App\Models\Ashanls;
+use App\Http\Controllers\AshftController;
+use App\Models\Ashft;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,4 +96,20 @@ Route::get('activities/{activity}/shipments/{shipment}/ashanls/create', [Ashanls
 Route::post('activities/{activity}/shipments/{shipment}/ashanls', [AshanlsController::class, 'store'])->name('ashanls.store');
 Route::get('/Ash/{ashanls}/edit', [AshanlsController::class, 'edit'])->name('ashanls.edit');
 Route::put('/Ash/{ashanls}', [AshanlsController::class, 'update'])->name('ashanls.update');
+
+// bagian untuk Ashft
+//Route::get('activities/{activity}/ashft/create', [AshftController::class, 'create'])->name('ashft.create');
+//Route::post('activities/{activity}/ashft', [AshftController::class, 'store'])->name('ashft.store');
+
+// routes/web.php
+// ashft
+
+Route::resource('ashfts', AshftController::class);
+Route::resource('activities/{activity}/shipments/{shipment}/ashfts', AshftController::class)->except(['create', 'store', 'edit', 'update']);
+// Rute khusus untuk create, store, edit, update
+Route::get('activities/{activity}/shipments/{shipment}/ashfts/create', [AshftController::class, 'create'])->name('ashfts.create');
+Route::post('activities/{activity}/shipments/{shipment}/ashfts', [AshftController::class, 'store'])->name('ashfts.store');
+Route::get('activities/{activity}/shipments/{shipment}/ashfts/{ashft}/edit', [AshftController::class, 'edit'])->name('ashfts.edit');
+Route::put('activities/{activity}/shipments/{shipment}/ashfts/{ashft}', [AshftController::class, 'update'])->name('ashfts.update');
+
 
