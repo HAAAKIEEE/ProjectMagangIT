@@ -474,17 +474,11 @@
                                 <td>{{ $ashft->ht1 }}</td>
                                 <td>{{ $ashft->ft1 }}</td>
                                 <td>
-                                    <!-- Add action buttons here -->
-                                    <a href="{{ route('ashft.create', ['activity' => $activity->id, 'shipment' => $shipment->id]) }}" class="btn btn-primary">Create Ashft</a>
-                                    <a href="{{ route('ashfts.edit', $ashft->id) }}"
-                                        class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="{{ route('ashfts.destroy', $ashft->id) }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
-                                    </form>
+                                    <!-- Tombol edit yang berwarna kuning -->
+                                    <div class="d-flex justify-content-center align-items-center">
+                                                                <a href="{{ route('ashfts.edit', $ashft->id) }}"
+                                                                    class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -496,6 +490,7 @@
                 Belum ada data Ash Fusion Temperature yang ditambahkan.
             </div>
         @endif
+
 
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

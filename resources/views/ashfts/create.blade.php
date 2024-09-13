@@ -14,10 +14,10 @@
         </div>
     @endif
 
-    <form action="{{ route('ashfts.store') }}" method="POST">
+    <form action="{{ route('ashfts.store',['activity' => $activity->id, 'shipment' => $shipment->id]) }}" method="POST">
         @csrf
         <input type="hidden" name="shipment_id" value="{{ old('shipment_id', $shipment->id) }}">
-        <input type="hidden" name="activity_id" value="{{ old('activity_id', $activity->id) }}">
+        <input type="hidden" name="activity_id" value="{{ old('activity_id', $activity->id) }}">     
 
         <div class="form-group">
             <label for="idt">IDT:</label>

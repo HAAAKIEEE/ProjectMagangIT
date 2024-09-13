@@ -25,6 +25,7 @@ class AshanlsController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         // Validasi data
         $validatedData = $request->validate([
             'cal' => 'required|numeric',
@@ -33,6 +34,9 @@ class AshanlsController extends Controller
             'fe' => 'required|numeric',
             'ca' => 'required|numeric',
             'mg' => 'required|numeric',
+            'un' => 'required|numeric',
+            'fofa' => 'required|numeric',
+            'slafa' => 'required|numeric',
             'na' => 'required|numeric',
             'k2' => 'required|numeric',
             'ti' => 'required|numeric',
@@ -43,9 +47,13 @@ class AshanlsController extends Controller
 
         // Simpan data ke session
         session()->put('ash_analysis_data', $validatedData);
+        $validatedData['shipment_id'] =  $request->input('shipment_id');
+        $validatedData['activity_id'] =   $request->input('activity_id');
+
+        Ashanls::create($validatedData);
 
         // Redirect ke halaman Ash Fusion Temperature
-        return redirect()->route('ashft.create', [
+        return redirect()->route('ashfts.create', [
             'activity' => $request->input('activity_id'),
             'shipment' => $request->input('shipment_id')
         ]);
