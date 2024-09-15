@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Tem;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -71,60 +72,119 @@ class ActivityController extends Controller
         return redirect()->route('activities.show', $activity->id);
     }
 
+    // public function show($id)
+    // {
+    //     // Ambil aktivitas berdasarkan ID
+    //     $activity = Activity::with(['ashfts', 'shipments.roas', 'shipments.coas', 'shipments.ashanls', 'shipments.tems'])->findOrFail($id);
+
+    //     // Ambil nilai pencarian dari request
+    //     $search = request('search');
+
+    //     // Query untuk mengambil shipment dengan relasi yang diperlukan
+    //     $query = $activity->shipments()->with(['roas', 'coas', 'ashanls', 'ashfts','tems']);
+
+    //     if ($search) {
+    //         // Filter berdasarkan pencarian
+    //         $query->where(function ($q) use ($search) {
+    //             $q->where('mv', 'like', "%$search%")
+    //                 ->orWhere('bg', 'like', "%$search%")
+    //                 ->orWhere('gar', 'like', "%$search%")
+    //                 ->orWhere('sv', 'like', "%$search%");
+    //         });
+    //     }
+
+    //     // Ambil shipments sesuai dengan query yang difilter
+    //     $shipments = $query->get();
+
+    //     // Ambil data roas, coas, ashanls, dan ashfts yang unik
+    //     $roas = $shipments->flatMap(function ($shipment) {
+    //         return $shipment->roas;
+    //     })->unique('id');
+
+    //     $coas = $shipments->flatMap(function ($shipment) {
+    //         return $shipment->coas;
+    //     })->unique('id');
+
+    //     $ashanls = $shipments->flatMap(function ($shipment) {
+    //         return $shipment->ashanls;
+    //     })->unique('id');
+
+    //     $ashfts = $shipments->flatMap(function ($shipment) {
+    //         return $shipment->ashfts;
+    //     })->unique('id');
+    //     $tems = Tem::get()
+
+    //     // Jika pencarian tidak menemukan hasil, tambahkan alert ke session
+    //     if ($search && $shipments->isEmpty()) {
+    //         return redirect()->route('activities.show', $id)
+    //             ->with('alert', "Tidak ditemukan hasil pencarian untuk kata kunci '$search'.");
+    //     }
+
+    //     // Ambil data coas dan ashanls dari aktivitas
+    //     $allCoas = $activity->coas;
+    //     $allAshanls = $activity->ashanls;
+    //     $allAshfts = $activity->ashfts; // Ambil data Ashft dari aktivitas
+    //     $allTems = $activity->tems;
+    //     return view('activities.show', compact('activity', 'shipments', 'roas', 'coas', 'allCoas', 'allAshanls', 'ashanls', 'ashfts', 'allAshfts','allTems','tems'));
+    // }
+  
     public function show($id)
-    {
-        // Ambil aktivitas berdasarkan ID
-        $activity = Activity::with(['ashfts', 'shipments.roas', 'shipments.coas', 'shipments.ashanls'])->findOrFail($id);
+{
+    // Ambil aktivitas berdasarkan ID
+    $activity = Activity::with(['ashfts', 'shipments.roas', 'shipments.coas', 'shipments.ashanls', 'shipments.tems'])->findOrFail($id);
 
-        // Ambil nilai pencarian dari request
-        $search = request('search');
+    // Ambil nilai pencarian dari request
+    $search = request('search');
 
-        // Query untuk mengambil shipment dengan relasi yang diperlukan
-        $query = $activity->shipments()->with(['roas', 'coas', 'ashanls', 'ashfts']);
+    // Query untuk mengambil shipment dengan relasi yang diperlukan
+    $query = $activity->shipments()->with(['roas', 'coas', 'ashanls', 'ashfts', 'tems']);
 
-        if ($search) {
-            // Filter berdasarkan pencarian
-            $query->where(function ($q) use ($search) {
-                $q->where('mv', 'like', "%$search%")
-                    ->orWhere('bg', 'like', "%$search%")
-                    ->orWhere('gar', 'like', "%$search%")
-                    ->orWhere('sv', 'like', "%$search%");
-            });
-        }
-
-        // Ambil shipments sesuai dengan query yang difilter
-        $shipments = $query->get();
-
-        // Ambil data roas, coas, ashanls, dan ashfts yang unik
-        $roas = $shipments->flatMap(function ($shipment) {
-            return $shipment->roas;
-        })->unique('id');
-
-        $coas = $shipments->flatMap(function ($shipment) {
-            return $shipment->coas;
-        })->unique('id');
-
-        $ashanls = $shipments->flatMap(function ($shipment) {
-            return $shipment->ashanls;
-        })->unique('id');
-
-        $ashfts = $shipments->flatMap(function ($shipment) {
-            return $shipment->ashfts;
-        })->unique('id');
-
-        // Jika pencarian tidak menemukan hasil, tambahkan alert ke session
-        if ($search && $shipments->isEmpty()) {
-            return redirect()->route('activities.show', $id)
-                ->with('alert', "Tidak ditemukan hasil pencarian untuk kata kunci '$search'.");
-        }
-
-        // Ambil data coas dan ashanls dari aktivitas
-        $allCoas = $activity->coas;
-        $allAshanls = $activity->ashanls;
-        $allAshfts = $activity->ashfts; // Ambil data Ashft dari aktivitas
-
-        return view('activities.show', compact('activity', 'shipments', 'roas', 'coas', 'allCoas', 'allAshanls', 'ashanls', 'ashfts', 'allAshfts'));
+    if ($search) {
+        // Filter berdasarkan pencarian
+        $query->where(function ($q) use ($search) {
+            $q->where('mv', 'like', "%$search%")
+                ->orWhere('bg', 'like', "%$search%")
+                ->orWhere('gar', 'like', "%$search%")
+                ->orWhere('sv', 'like', "%$search%");
+        });
     }
+
+    // Ambil shipments sesuai dengan query yang difilter
+    $shipments = $query->get();
+
+    // Ambil data tems berdasarkan activity_id
+    $tems = Tem::whereIn('shipment_id', $shipments->pluck('id'))->get();
+
+    // Ambil data roas, coas, ashanls, dan ashfts yang unik
+    $roas = $shipments->flatMap(function ($shipment) {
+        return $shipment->roas;
+    })->unique('id');
+
+    $coas = $shipments->flatMap(function ($shipment) {
+        return $shipment->coas;
+    })->unique('id');
+
+    $ashanls = $shipments->flatMap(function ($shipment) {
+        return $shipment->ashanls;
+    })->unique('id');
+
+    $ashfts = $shipments->flatMap(function ($shipment) {
+        return $shipment->ashfts;
+    })->unique('id');
+
+    $allTems = $activity->tems; // Data tems dari aktivitas
+    $allCoas = $activity->coas;
+    $allAshanls = $activity->ashanls;
+    $allAshfts = $activity->ashfts; // Ambil data Ashft dari aktivitas
+    $allTems = $activity->tems;
+    // Jika pencarian tidak menemukan hasil, tambahkan alert ke session
+    if ($search && $shipments->isEmpty()) {
+        return redirect()->route('activities.show', $id)
+            ->with('alert', "Tidak ditemukan hasil pencarian untuk kata kunci '$search'.");
+    }
+
+    return view('activities.show', compact('activity', 'shipments', 'roas', 'coas', 'allCoas', 'allAshanls', 'ashanls', 'ashfts', 'allAshfts', 'allTems', 'tems'));
+}
 
     public function destroy($id)
     {

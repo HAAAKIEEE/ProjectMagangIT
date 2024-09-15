@@ -38,4 +38,8 @@ class Activity extends Model
     {
         return $this->hasMany(Ashft::class); // atau relasi yang sesuai
     }
+    public function tems()
+    {
+        return $this->hasMany(Ashft::class); // atau relasi yang sesuai
+    }
 }

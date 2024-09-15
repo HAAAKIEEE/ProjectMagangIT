@@ -13,6 +13,7 @@ use App\Http\Controllers\CoaController;
 use App\Http\Controllers\AshanlsController;
 use App\Models\Ashanls;
 use App\Http\Controllers\AshftController;
+use App\Http\Controllers\TemController;
 use App\Models\Ashft;
 
 /*
@@ -112,3 +113,7 @@ Route::get('activities/{activity}/shipments/{shipment}/ashfts/create', [AshftCon
 Route::post('activities/{activity}/shipments/{shipment}/ashfts', [AshftController::class, 'store'])->name('ashfts.store');
 Route::get('/ashfts/{ashft}/edit', [AshftController::class, 'edit'])->name('ashfts.edit');
 Route::put('/ashfts/{ashft}', [AshftController::class, 'update'])->name('ashfts.update');
+
+Route::get('/tem', [TemController::class, 'index'])->name('tem_index');
+Route::get('/activities/{activity}/shipments/{shipment}/tem/create', [TemController::class, 'create'])->name('tems.create');
+Route::post('/tem', [TemController::class, 'store'])->name('tem_store');

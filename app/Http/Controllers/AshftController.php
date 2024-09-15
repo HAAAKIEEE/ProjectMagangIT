@@ -27,7 +27,7 @@ class AshftController extends Controller
 
         $id = session('id'); // Atau ambil ID dari sumber lain
         // Menampilkan form untuk membuat ROA baru
-        return view('ashfts.create', compact('activity', 'shipment', 'id', 'data'));
+        return view('ashfts.create', compact('activity', 'shipment', 'id','data'));
 
         // return view('ashfts.create', [
         //     'activity' => $activity,
@@ -39,52 +39,6 @@ class AshftController extends Controller
 
 
     // app/Http/Controllers/AshftController.php
-
-    public function index($activityId, $shipmentId)
-    {
-        // Cari activity berdasarkan ID
-        $activity = Activity::findOrFail($activityId);
-
-        // Cari shipment berdasarkan ID
-        $shipment = Shipment::findOrFail($shipmentId);
-
-        // Ambil semua Ash Fusion Temperature terkait dengan activity dan shipment
-        $ashfts = Ashft::where('activity_id', $activityId)
-            ->where('shipment_id', $shipmentId)
-            ->get();
-
-        // Kirim data ke view ashfts/index.blade.php
-        return view('ashfts.index', compact('activity', 'shipment', 'ashfts'));
-    }
-
-
-
-    public function update(Request $request, Ashft $ashft)
-    {
-        // Validasi data yang dikirim dari form
-        $validatedData = $request->validate([
-            'idt' => 'required|numeric',
-            'st' => 'required|numeric',
-            'ht' => 'required|numeric',
-            'ft' => 'required|numeric',
-            'idt1' => 'required|numeric',
-            'st1' => 'required|numeric',
-            'ht1' => 'required|numeric',
-            'ft1' => 'required|numeric',
-            'shipment_id' => 'required|exists:shipments,id', // Pastikan validasi sesuai
-            'activity_id' => 'required|exists:activities,id', // Pastikan validasi sesuai
-        ]);
-
-        $ashft->update($validatedData);
-
-        return redirect()->route('activities.show', $ashft->activity_id)->with('success', 'Ash Analysis berhasil diperbarui.');
-        // Redirect kembali ke halaman index dengan pesan sukses
-        // return redirect()->route('ashfts.index')
-        //     ->with('success', 'Ash Fusion Temperature updated successfully.');
-    }
-
-
-
 
     public function store(Request $request)
     {
@@ -100,33 +54,18 @@ class AshftController extends Controller
             'shipment_id' => 'required|exists:shipments,id', // Pastikan validasi sesuai
             'activity_id' => 'required|exists:activities,id', // Pastikan validasi sesuai
         ]);
+         // Simpan data ke session
+         session()->put('ash_analysis_data', $validatedData);
+         $validatedData['shipment_id'] =  $request->input('shipment_id');
+         $validatedData['activity_id'] =   $request->input('activity_id');
 
         // Buat data Ashft baru
         Ashft::create($validatedData);
 
-        return redirect()->route('activities.show', $request->input('activity_id'))
+        return redirect()->route('tems.create', ['activity' => $request->input('activity_id'),
+        'shipment' => $request->input('shipment_id')])
             ->with('success', 'Data berhasil ditambahkan.');
     }
-
-    public function edit(Ashft  $ashft)
-    {
-        // // Cari activity berdasarkan ID
-        // $activity = Activity::findOrFail($activityId);
-
-        // // Cari shipment berdasarkan ID
-        // $shipment = Shipment::findOrFail($shipmentId);
-
-        // // Cari Ash Fusion Temperature berdasarkan ID
-        // $ashft = Ashft::findOrFail($ashftId);
-        $activity = $ashft->activity; // Mendapatkan aktivitas terkait dari ROA
-        $shipment = $ashft->shipment; // Mendapatkan shipment terkait dari ROA
-        $id = session('id'); // Atau ambil ID dari sumber lain
-        // Kirim variabel ke view edit.blade.php
-        return view('ashfts.edit', compact('activity', 'shipment', 'ashft'));
-    }
-
-
-
 
 
     // public function show($id)

@@ -491,7 +491,64 @@
             </div>
         @endif
 
-
+        <h4>Trace Element Major</h4>
+        @if ($tems->isNotEmpty())
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered text-center table-hover">
+                    <thead class="thead-dark thead-custom">
+                        <tr>
+                            <th colspan="7">Trace Element Major</th>
+                            <th rowspan="4">Actions</th>
+                        </tr>
+                      
+                        <tr>
+                            <th>CI</th>
+                            <th>F</th>
+                            <th>P</th>
+                            <th>B</th>
+                            <th>As</th>
+                            <th>Hg</th>
+                            <th>Se</th>
+                           
+                        </tr>
+                        <tr>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($tems as $tem)
+                            <tr>
+                                <td>{{ $tem->ci }}</td>
+                                <td>{{ $tem->f }}</td>
+                                <td>{{ $tem->p }}</td>
+                                <td>{{ $tem->b }}</td>
+                                <td>{{ $tem->as }}</td>
+                                <td>{{ $tem->hg }}</td>
+                                <td>{{ $tem->se }}</td>
+                                <td>
+                                    <!-- Tombol edit yang berwarna kuning -->
+                                    <div class="d-flex justify-content-center align-items-center">
+                                                                <a href="{{ route('ashfts.edit', $ashft->id) }}"
+                                                                    class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="alert alert-warning mt-4" role="alert">
+                Belum ada data Trace Element Major Temperature yang ditambahkan.
+            </div>
+        @endif
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
