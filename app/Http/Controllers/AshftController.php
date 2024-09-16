@@ -66,19 +66,31 @@ class AshftController extends Controller
         'shipment' => $request->input('shipment_id')])
             ->with('success', 'Data berhasil ditambahkan.');
     }
+    public function edit(Ashft $ashft)
+    {
+        $activity = $ashft->activity; // Mendapatkan aktivitas terkait dari ROA
+        $shipment = $ashft->shipment; // Mendapatkan shipment terkait dari ROA
+        $id = session('id'); // Atau ambil ID dari sumber lain
+        return view('ashfts.edit', compact('ashft',  'activity', 'shipment', 'id'));
+    }
+    
+    public function update(Request $request, Ashft $ashft)
+    {
+        $validatedData = $request->validate([
+            'idt' => 'required|numeric',
+            'st' => 'required|numeric',
+            'ht' => 'required|numeric',
+            'ft' => 'required|numeric',
+            'idt1' => 'required|numeric',
+            'st1' => 'required|numeric',
+            'ht1' => 'required|numeric',
+            'ft1' => 'required|numeric',
+            'shipment_id' => 'required|exists:shipments,id', // Pastikan validasi sesuai
+            'activity_id' => 'required|exists:activities,id', // Pastikan validasi sesuai
+        ]);
 
+        $ashft->update($validatedData);
 
-    // public function show($id)
-    // {
-    //     $activity = Activity::with('ashfts')->find($id); // Mengambil activity beserta ashfts
-    //     if (!$activity) {
-    //         return redirect()->route('activities.index')->with('error', 'Activity tidak ditemukan.');
-    //     }
-    //     $shipments = Shipment::all(); // Ambil shipments berdasarkan activity_id
-    //     $roas = ROA::all();
-    //     $coas = Coa::all();
-    //     $ashanls = Ashanls::all();
-    //     $ashfts = $activity->ashfts ?? collect(); // Pastikan $ashfts adalah koleksi, meskipun kosong
-    //     return view('activities.show', compact('activity', 'ashfts', 'shipments', 'roas','coas','ashanls'));
-    // }
+        return redirect()->route('activities.show', $ashft->activity_id)->with('success', 'Ash Analysis berhasil diperbarui.');
+    }
 }

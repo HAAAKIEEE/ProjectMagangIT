@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Afcship;
 use App\Models\Tem;
+use App\Models\Ua;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -131,13 +133,13 @@ class ActivityController extends Controller
     public function show($id)
 {
     // Ambil aktivitas berdasarkan ID
-    $activity = Activity::with(['ashfts', 'shipments.roas', 'shipments.coas', 'shipments.ashanls', 'shipments.tems'])->findOrFail($id);
+    $activity = Activity::with(['ashfts', 'shipments.roas', 'shipments.coas', 'shipments.ashanls', 'shipments.tems','shipments.afcships'])->findOrFail($id);
 
     // Ambil nilai pencarian dari request
     $search = request('search');
 
     // Query untuk mengambil shipment dengan relasi yang diperlukan
-    $query = $activity->shipments()->with(['roas', 'coas', 'ashanls', 'ashfts', 'tems']);
+    $query = $activity->shipments()->with(['roas', 'coas', 'ashanls', 'ashfts', 'tems','afcships']);
 
     if ($search) {
         // Filter berdasarkan pencarian
@@ -154,6 +156,10 @@ class ActivityController extends Controller
 
     // Ambil data tems berdasarkan activity_id
     $tems = Tem::whereIn('shipment_id', $shipments->pluck('id'))->get();
+    $afcships = Afcship::whereIn('shipment_id', $shipments->pluck('id'))->get();
+    $uas = Ua::whereIn('shipment_id', $shipments->pluck('id'))->get();
+
+
 
     // Ambil data roas, coas, ashanls, dan ashfts yang unik
     $roas = $shipments->flatMap(function ($shipment) {
@@ -177,13 +183,15 @@ class ActivityController extends Controller
     $allAshanls = $activity->ashanls;
     $allAshfts = $activity->ashfts; // Ambil data Ashft dari aktivitas
     $allTems = $activity->tems;
+    $allAfcships = $activity->afcships;
     // Jika pencarian tidak menemukan hasil, tambahkan alert ke session
     if ($search && $shipments->isEmpty()) {
         return redirect()->route('activities.show', $id)
             ->with('alert', "Tidak ditemukan hasil pencarian untuk kata kunci '$search'.");
     }
 
-    return view('activities.show', compact('activity', 'shipments', 'roas', 'coas', 'allCoas', 'allAshanls', 'ashanls', 'ashfts', 'allAshfts', 'allTems', 'tems'));
+    return view('activities.show', compact('activity', 'shipments', 'roas',
+     'coas', 'allCoas', 'allAshanls', 'ashanls', 'ashfts', 'allAshfts', 'allTems', 'tems','afcships','allAfcships','uas'));
 }
 
     public function destroy($id)

@@ -40,6 +40,14 @@ class Activity extends Model
     }
     public function tems()
     {
-        return $this->hasMany(Ashft::class); // atau relasi yang sesuai
+        return $this->hasMany(Tem::class); // atau relasi yang sesuai
+    }
+    public function afcships()
+    {
+        return $this->hasMany(Afcship::class); // atau relasi yang sesuai
+    }
+    public function uas()
+    {
+        return $this->hasMany(Ua::class); // atau relasi yang sesuai
     }
 }

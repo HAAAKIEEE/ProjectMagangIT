@@ -476,8 +476,8 @@
                                 <td>
                                     <!-- Tombol edit yang berwarna kuning -->
                                     <div class="d-flex justify-content-center align-items-center">
-                                                                <a href="{{ route('ashfts.edit', $ashft->id) }}"
-                                                                    class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                        <a href="{{ route('ashfts.edit', $ashft->id) }}"
+                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
                                     </div>
                                 </td>
                             </tr>
@@ -500,7 +500,7 @@
                             <th colspan="7">Trace Element Major</th>
                             <th rowspan="4">Actions</th>
                         </tr>
-                      
+
                         <tr>
                             <th>CI</th>
                             <th>F</th>
@@ -509,7 +509,7 @@
                             <th>As</th>
                             <th>Hg</th>
                             <th>Se</th>
-                           
+
                         </tr>
                         <tr>
                             <th>°C</th>
@@ -519,7 +519,7 @@
                             <th>°C</th>
                             <th>°C</th>
                             <th>°C</th>
-                           
+
                         </tr>
                     </thead>
                     <tbody>
@@ -535,8 +535,8 @@
                                 <td>
                                     <!-- Tombol edit yang berwarna kuning -->
                                     <div class="d-flex justify-content-center align-items-center">
-                                                                <a href="{{ route('ashfts.edit', $ashft->id) }}"
-                                                                    class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                        <a href="{{ route('tem.edit', $tem->id) }}"
+                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
                                     </div>
                                 </td>
                             </tr>
@@ -549,6 +549,127 @@
                 Belum ada data Trace Element Major Temperature yang ditambahkan.
             </div>
         @endif
+
+        <h4>Additional for Chinese shipment</h4>
+        @if ($afcships->isNotEmpty())
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered text-center table-hover">
+                    <thead class="thead-dark thead-custom">
+                        <tr>
+                            <th colspan="4">Additional for Chinese shipment</th>
+                            <th rowspan="4">Actions</th>
+                        </tr>
+
+                        <tr>
+                            <th>VM,pct</th>
+                            <th>CV,c/g</th>
+                            <th>PM</th>
+                            <th>Radioactive</th>
+
+                        </tr>
+                        <tr>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($afcships as $afcship)
+                            <tr>
+
+                                <td>{{ $afcship->vm_pct }}</td>
+                                <td>{{ $afcship->cv_cg }}</td>
+                                <td>{{ $afcship->pm }}</td>
+                                <td>{{ $afcship->radioactiv }}</td>
+                                <td>
+                                    <!-- Tombol edit yang berwarna kuning -->
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{ route('afcship.edit', $afcship->id) }}"
+                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="alert alert-warning mt-4" role="alert">
+                Belum ada data Additional for Chinese shipment yang ditambahkan.
+            </div>
+        @endif
+
+        {{-- ua --}}
+        <h4>Ultimate Analysis (adb)</h4>
+        @if ($uas->isNotEmpty())
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered text-center table-hover">
+                    <thead class="thead-dark thead-custom">
+                        <tr>
+                            <th colspan="7">Ultimate Analysis (adb)</th>
+                            <th rowspan="2">HGI</th>
+                            <th rowspan="2">MHC/EQM</th>
+
+                            <th rowspan="4">Actions</th>
+                        </tr>
+
+                        <tr>
+                            <th>M</th>
+                            <th>Ac</th>
+                            <th>C</th>
+                            <th>H</th>
+                            <th>N</th>
+                            <th>S</th>
+                            <th>O</th>
+                            
+
+                        </tr>
+                        <tr>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>Index</th>
+                            <th>%</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($uas as $ua)
+                            <tr>
+                             
+                                <td>{{ $ua->m }}</td>
+                                <td>{{ $ua->ac }}</td>
+                                <td>{{ $ua->c }}</td>
+                                <td>{{ $ua->h }}</td>
+                                <td>{{ $ua->n }}</td>
+                                <td>{{ $ua->s }}</td>
+                                <td>{{ $ua->o }}</td>
+                                <td>{{ $ua->index }}</td>
+                                <td>{{ $ua->persen }}</td>
+                                <td>
+                                    <!-- Tombol edit yang berwarna kuning -->
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{ route('ua.edit', $ua->id) }}"
+                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="alert alert-warning mt-4" role="alert">
+                Belum ada data Ultimate Analysis (adb) yang ditambahkan.
+            </div>
+        @endif
+
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

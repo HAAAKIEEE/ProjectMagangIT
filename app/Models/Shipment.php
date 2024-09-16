@@ -91,6 +91,14 @@ class Shipment extends Model
     }
     public function tems()
     {
-        return $this->hasMany(Ashft::class);
+        return $this->hasMany(Tem::class);
+    }
+    public function afcships()
+    {
+        return $this->hasMany(Afcship::class);
+    }
+    public function uas()
+    {
+        return $this->hasMany(Ua::class); // atau relasi yang sesuai
     }
 }

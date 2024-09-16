@@ -53,7 +53,7 @@ class TemController extends Controller
         // dd($request->all());
    
         // Validate the request
-        $request->validate([
+        $validatedData = $request->validate([
             'ci' => 'required|string|max:255',
             'f' => 'required|string|max:255',
             'p' => 'required|string|max:255',
@@ -64,17 +64,18 @@ class TemController extends Controller
         ]);
     
         // Tentukan activity_id dan shipment_id secara manual
-        $activity_id = 1;
-        $shipment_id = 1;
+        // $activity_id = 1;
+        // $shipment_id = 1;
+        session()->put('ash_analysis_data', $validatedData);
+        $validatedData['shipment_id'] =  $request->input('shipment_id');
+        $validatedData['activity_id'] =   $request->input('activity_id');
     
         // Buat data shipment dan tambahkan nilai activity_id dan shipment_id
-        $tem = Tem::create(array_merge(
-            $request->all(),
-            ['activity_id' => $activity_id, 'shipment_id' => $shipment_id] // Tetapkan activity_id dan shipment_id
-        ));
+        Tem::create($validatedData);
     
         // Redirect with success message
-        return redirect()->route('tem_index')
+        return redirect()->route('afcship.create', ['activity' => $request->input('activity_id'),
+        'shipment' => $request->input('shipment_id')])
             ->with('success', 'Data berhasil disimpan.');
     }
     
@@ -99,7 +100,10 @@ class TemController extends Controller
      */
     public function edit(Tem $tem)
     {
-        //
+        $activity = $tem->activity; // Mendapatkan aktivitas terkait dari ROA
+        $shipment = $tem->shipment; // Mendapatkan shipment terkait dari ROA
+        $id = session('id'); 
+        return view('tems.edit', compact('tem', 'activity', 'shipment', 'id'));
     }
 
     /**
@@ -112,6 +116,20 @@ class TemController extends Controller
     public function update(Request $request, Tem $tem)
     {
         //
+        $validatedData = $request->validate([
+            'ci' => 'required|string|max:255',
+            'f' => 'required|string|max:255',
+            'p' => 'required|string|max:255',
+            'b' => 'nullable|string|max:255',
+            'as' => 'required|string|max:255',
+            'hg' => 'nullable|string|max:255',
+            'se' => 'required|string|max:255',
+        ]);
+        $tem->update($validatedData);
+
+        // Redirect kembali ke halaman yang sesuai dengan pesan sukses
+        return redirect()->route('activities.show', $tem->activity_id)->with('success', 'Ash Analysis berhasil diperbarui.');
+  
     }
 
     /**
