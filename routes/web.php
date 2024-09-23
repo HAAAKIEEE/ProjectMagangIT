@@ -17,6 +17,7 @@ use App\Http\Controllers\AshftController;
 use App\Http\Controllers\TemController;
 use App\Http\Controllers\UaController;
 use App\Models\Ashft;
+use App\Http\Controllers\SaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -134,3 +135,9 @@ Route::get('/activities/{activity}/shipments/{shipment}/ua/create', [UaControlle
 Route::get('/uas/{uas}/edit', [UaController::class, 'edit'])->name('ua.edit');
 Route::put('/uas/{uas}', [UaController::class, 'update'])->name('ua_update');
 Route::post('/ua', [UaController::class, 'store'])->name('ua_store');
+
+// sas 
+Route::get('/activities/{activity}/shipments/{shipment}/sa/create', [UaController::class, 'create'])->name('sa.create');
+Route::get('/sas/{sas}/edit', [SaController::class, 'edit'])->name('ua.edit');
+Route::put('/sas/{sas}', [SaController::class, 'update'])->name('ua_update');
+Route::post('/sa', [SaController::class, 'store'])->name('sa_store');
