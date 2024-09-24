@@ -670,6 +670,101 @@
             </div>
         @endif
 
+        {{-- sa --}}
+        <h4>Size Analysis</h4>
+        @if ($uas->isNotEmpty())
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered text-center table-hover">
+                    <thead class="thead-dark thead-custom">
+                        <tr>
+                            <th colspan="18">Size Analysis</th>
+                            {{-- <th colspan="2">TOTAL %</th> <!-- Gabungan kolom TOTAL % --> --}}
+                            <th rowspan="4">Actions</th>
+                        </tr>
+
+                        <tr>
+
+                            <th>70_mm</th>
+                            <th>50_mm</th>
+                            <th>50_315_mm</th>
+                            <th>315_224_mm</th>
+                            <th>315_16_mm</th>
+                            <th>224_112_mm</th>
+                            <th>112_63_mm</th>
+                            <th>8_mm</th>
+                            <th>164_75_mm</th>
+                            <th>63_475_mm</th>
+                            <th>475_2_mm</th>
+                            <th>2_1_mm</th>
+                            <th>1_05_mm</th>
+                            <th>05_mm</th>
+                            <th>TOTAL %</th> 
+                            <th>size1</th>
+                            <th>size2</th>
+                            <th>050_mm_persen</th>
+                            <th>070_mm_persen</th>
+
+                        </tr>
+                        <tr>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($sas as $sa)
+                            <tr>
+                            
+                                {{-- <td>{{ $sa->70_mm }}</td>
+                                <td>{{ $sa->50_mm }}</td>
+                                <td>{{ $sa->50_315_mm }}</td>
+                                <td>{{ $sa->315_224_mm }}</td>
+                                <td>{{ $sa->315_16_mm }}</td>
+                                <td>{{ $sa->224_112_mm }}</td>
+                                <td>{{ $sa->112_63_mm }}</td>
+                                <td>{{ $sa->8_mm }}</td>
+                                <td>{{ $sa->164_75_mm }}</td>
+                                <td>{{ $sa->63_475_mm }}</td>
+                                <td>{{ $sa->475_2_mm }}</td>
+                                <td>{{ $sa->2_1_mm }}</td>
+                                <td>{{ $sa->1_05_mm }}</td>
+                                <td>{{ $sa->05_mm }}</td>
+                                <td>{{ $sa->total }}</td>
+                                <td>{{ $sa->size1 }}</td>
+                                <td>{{ $sa->size2 }}</td>
+                                <td>{{ $sa->050_mm_persen }}</td>
+                                <td>{{ $sa->070_mm_persen }}</td>
+                                <td> --}}
+                                    <!-- Tombol edit yang berwarna kuning -->
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{ route('ua.edit', $sa->id) }}"
+                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="alert alert-warning mt-4" role="alert">
+                Belum ada data Ultimate Analysis (adb) yang ditambahkan.
+            </div>
+        @endif
+
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

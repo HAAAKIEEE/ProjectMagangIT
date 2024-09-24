@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\Afcship;
 use App\Models\Tem;
 use App\Models\Ua;
+use App\Models\Sa;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -158,6 +159,7 @@ class ActivityController extends Controller
     $tems = Tem::whereIn('shipment_id', $shipments->pluck('id'))->get();
     $afcships = Afcship::whereIn('shipment_id', $shipments->pluck('id'))->get();
     $uas = Ua::whereIn('shipment_id', $shipments->pluck('id'))->get();
+    $sas = Sa::whereIn('shipment_id', $shipments->pluck('id'))->get();
 
 
 
@@ -191,7 +193,7 @@ class ActivityController extends Controller
     }
 
     return view('activities.show', compact('activity', 'shipments', 'roas',
-     'coas', 'allCoas', 'allAshanls', 'ashanls', 'ashfts', 'allAshfts', 'allTems', 'tems','afcships','allAfcships','uas'));
+     'coas', 'allCoas', 'allAshanls', 'ashanls', 'ashfts', 'allAshfts', 'allTems', 'tems','afcships','allAfcships','uas','sas'));
 }
 
     public function destroy($id)

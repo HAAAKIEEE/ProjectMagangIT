@@ -50,4 +50,8 @@ class Activity extends Model
     {
         return $this->hasMany(Ua::class); // atau relasi yang sesuai
     }
+    public function sas()
+    {
+        return $this->hasMany(Sa::class); // atau relasi yang sesuai
+    }
 }

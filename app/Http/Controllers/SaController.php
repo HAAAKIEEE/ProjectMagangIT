@@ -14,8 +14,8 @@ class SaController extends Controller
      */
     public function index()
     {
-        return view('uas.index',[
-            'uas'=>Sa::all()
+        return view('sas.index',[
+            'sas'=>Sa::all()
         ]);
         //
     }
@@ -78,6 +78,7 @@ class SaController extends Controller
      */
     public function show(Sa $sa)
     {
+        
         //
     }
 
