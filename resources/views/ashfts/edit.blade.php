@@ -14,57 +14,55 @@
         </div>
     @endif
 
-    <form action="{{ route('ashfts.update', $ashft->id) }}" method="POST">
+    <form action="{{ route('ashfts.update', ['activity' => $activity->id, 'shipment' => $shipment->id, 'ashft' => $ashft->id]) }}" method="POST">
         @csrf
         @method('PUT')
 
-        <div class="form-group">
-            <label for="number">ASHFT Number</label>
-            <input type="text" name="number" class="form-control" id="number" value="{{ old('number', $ashft->number) }}" required>
-        </div>
+        <input type="hidden" name="shipment_id" value="{{ old('shipment_id', $shipment->id) }}">
+        <input type="hidden" name="activity_id" value="{{ old('activity_id', $activity->id) }}">
 
         <div class="form-group">
-            <label for="idt">IDT</label>
+            <label for="idt">IDT:</label>
             <input type="number" name="idt" class="form-control" id="idt" value="{{ old('idt', $ashft->idt) }}" required>
         </div>
 
         <div class="form-group">
-            <label for="st">ST</label>
+            <label for="st">ST:</label>
             <input type="number" name="st" class="form-control" id="st" value="{{ old('st', $ashft->st) }}" required>
         </div>
 
         <div class="form-group">
-            <label for="ht">HT</label>
+            <label for="ht">HT:</label>
             <input type="number" name="ht" class="form-control" id="ht" value="{{ old('ht', $ashft->ht) }}" required>
         </div>
 
         <div class="form-group">
-            <label for="ft">FT</label>
+            <label for="ft">FT:</label>
             <input type="number" name="ft" class="form-control" id="ft" value="{{ old('ft', $ashft->ft) }}" required>
         </div>
 
         <div class="form-group">
-            <label for="idt1">IDT</label>
-            <input type="number" name="idt1" class="form-control" id="idt1" value="{{ old('idt', $ashft->idt1) }}" required>
+            <label for="idt1">IDT1:</label>
+            <input type="number" name="idt1" class="form-control" id="idt1" value="{{ old('idt1', $ashft->idt1) }}" required>
         </div>
 
         <div class="form-group">
-            <label for="st1">ST</label>
+            <label for="st1">ST1:</label>
             <input type="number" name="st1" class="form-control" id="st1" value="{{ old('st1', $ashft->st1) }}" required>
         </div>
 
         <div class="form-group">
-            <label for="ht1">HT</label>
+            <label for="ht1">HT1:</label>
             <input type="number" name="ht1" class="form-control" id="ht1" value="{{ old('ht1', $ashft->ht1) }}" required>
         </div>
 
         <div class="form-group">
-            <label for="ft1">FT</label>
+            <label for="ft1">FT1:</label>
             <input type="number" name="ft1" class="form-control" id="ft1" value="{{ old('ft1', $ashft->ft1) }}" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('ashfts.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('ashfts.index', ['activity' => $activity->id, 'shipment' => $shipment->id]) }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

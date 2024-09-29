@@ -58,9 +58,13 @@
             <div class="form-row-inline">
                 <div class="form-group">
                     <label for="ash">ASH</label>
+<<<<<<< HEAD
                     <input type="number" class="form-control" id="ash" 
                     name="ash" placeholder="Masukkan ASH" step="0.01">
                     
+=======
+                    <input type="number" class="form-control" id="ash" name="ash" placeholder="Masukkan ASH" step="0.01" required>
+>>>>>>> 91b7d024dcc829abddf36a5196bdb93945d0d2f6
                 </div>
                 <div class="form-group">
                     <label for="ash2">ASH2</label>

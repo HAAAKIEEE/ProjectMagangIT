@@ -8,12 +8,16 @@ use App\Http\Controllers\DomesticCompanyController;
 use App\Http\Controllers\SurveyorController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AfcshipController;
 use App\Http\Controllers\RoaController;
 use App\Http\Controllers\CoaController;
 use App\Http\Controllers\AshanlsController;
 use App\Models\Ashanls;
 use App\Http\Controllers\AshftController;
+use App\Http\Controllers\TemController;
+use App\Http\Controllers\UaController;
 use App\Models\Ashft;
+use App\Http\Controllers\SaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,7 +114,31 @@ Route::resource('ashfts', AshftController::class);
 // http://projectmagangit.test/activities/2/shipments/3/ashanls/create
 Route::get('activities/{activity}/shipments/{shipment}/ashfts/create', [AshftController::class, 'create'])->name('ashfts.create');
 Route::post('activities/{activity}/shipments/{shipment}/ashfts', [AshftController::class, 'store'])->name('ashfts.store');
-Route::get('activities/{activity}/shipments/{shipment}/ashfts/{ashft}/edit', [AshftController::class, 'edit'])->name('ashfts.edit');
-Route::put('activities/{activity}/shipments/{shipment}/ashfts/{ashft}', [AshftController::class, 'update'])->name('ashfts.update');
+Route::get('/ashfts/{ashft}/edit', [AshftController::class, 'edit'])->name('ashfts.edit');
+Route::put('/ashfts/{ashft}', [AshftController::class, 'update'])->name('ashfts.update');
 
+Route::get('/tem', [TemController::class, 'index'])->name('tem_index');
+Route::get('/tem/{tem}/edit', [TemController::class, 'edit'])->name('tem.edit');
+Route::put('/tem/{tem}', [TemController::class, 'update'])->name('tem.update');
+Route::get('/activities/{activity}/shipments/{shipment}/tem/create', [TemController::class, 'create'])->name('tems.create');
+Route::post('/tem', [TemController::class, 'store'])->name('tem_store');
 
+// afcship
+Route::get('/afcship', [AfcshipController::class, 'index'])->name('afcship_index');
+Route::get('/afcship/{afcship}/edit', [AfcshipController::class, 'edit'])->name('afcship.edit');
+Route::put('/afcship/{afcship}', [AfcshipController::class, 'update'])->name('afcship.update');
+Route::get('/activities/{activity}/shipments/{shipment}/afcship/create', [AfcshipController::class, 'create'])->name('afcship.create');
+Route::post('/afcship', [AfcshipController::class, 'store'])->name('afcship_store');
+
+// uas done edit dan sebagianya
+Route::get('/activities/{activity}/shipments/{shipment}/ua/create', [UaController::class, 'create'])->name('ua.create');
+Route::get('/uas/{uas}/edit', [UaController::class, 'edit'])->name('ua.edit');
+Route::put('/uas/{uas}', [UaController::class, 'update'])->name('ua_update');
+Route::post('/ua', [UaController::class, 'store'])->name('ua_store');
+
+// sas 
+Route::get('/activities/{activity}/shipments/{shipment}/sa/create', [UaController::class, 'create'])->name('sa.create');
+Route::get('/sas/{sas}/edit', [SaController::class, 'edit'])->name('ua.edit');
+Route::put('/sas/{sas}', [SaController::class, 'update'])->name('ua_update');
+Route::post('/sa', [SaController::class, 'store'])->name('sa_store');
+Route::get('/sa', [SaController::class, 'create'])->name('sa_create');

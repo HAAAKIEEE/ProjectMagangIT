@@ -474,6 +474,7 @@
                                 <td>{{ $ashft->ht1 }}</td>
                                 <td>{{ $ashft->ft1 }}</td>
                                 <td>
+<<<<<<< HEAD
                                     <!-- Add action buttons here -->
                                     <a href="{{ route('ashfts.create', ['activity' => $activity->id, 'shipment' => $shipment->id]) }}" class="btn btn-primary">Create Ashft</a>
                                     <a href="{{ route('ashfts.edit', [ 'activity' => $activity->id,'shipment' => $shipment->id ,'ashft'=>$ashft->id] ) }}"
@@ -485,6 +486,13 @@
                                         <button type="submit" class="btn btn-danger btn-sm"
                                             onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
                                     </form>
+=======
+                                    <!-- Tombol edit yang berwarna kuning -->
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{ route('ashfts.edit', $ashft->id) }}"
+                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                    </div>
+>>>>>>> 91b7d024dcc829abddf36a5196bdb93945d0d2f6
                                 </td>
                             </tr>
                         @endforeach
@@ -494,6 +502,280 @@
         @else
             <div class="alert alert-warning mt-4" role="alert">
                 Belum ada data Ash Fusion Temperature yang ditambahkan.
+            </div>
+        @endif
+
+        <h4>Trace Element Major</h4>
+        @if ($tems->isNotEmpty())
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered text-center table-hover">
+                    <thead class="thead-dark thead-custom">
+                        <tr>
+                            <th colspan="7">Trace Element Major</th>
+                            <th rowspan="4">Actions</th>
+                        </tr>
+
+                        <tr>
+                            <th>CI</th>
+                            <th>F</th>
+                            <th>P</th>
+                            <th>B</th>
+                            <th>As</th>
+                            <th>Hg</th>
+                            <th>Se</th>
+
+                        </tr>
+                        <tr>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($tems as $tem)
+                            <tr>
+                                <td>{{ $tem->ci }}</td>
+                                <td>{{ $tem->f }}</td>
+                                <td>{{ $tem->p }}</td>
+                                <td>{{ $tem->b }}</td>
+                                <td>{{ $tem->as }}</td>
+                                <td>{{ $tem->hg }}</td>
+                                <td>{{ $tem->se }}</td>
+                                <td>
+                                    <!-- Tombol edit yang berwarna kuning -->
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{ route('tem.edit', $tem->id) }}"
+                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="alert alert-warning mt-4" role="alert">
+                Belum ada data Trace Element Major Temperature yang ditambahkan.
+            </div>
+        @endif
+
+        <h4>Additional for Chinese shipment</h4>
+        @if ($afcships->isNotEmpty())
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered text-center table-hover">
+                    <thead class="thead-dark thead-custom">
+                        <tr>
+                            <th colspan="4">Additional for Chinese shipment</th>
+                            <th rowspan="4">Actions</th>
+                        </tr>
+
+                        <tr>
+                            <th>VM,pct</th>
+                            <th>CV,c/g</th>
+                            <th>PM</th>
+                            <th>Radioactive</th>
+
+                        </tr>
+                        <tr>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($afcships as $afcship)
+                            <tr>
+
+                                <td>{{ $afcship->vm_pct }}</td>
+                                <td>{{ $afcship->cv_cg }}</td>
+                                <td>{{ $afcship->pm }}</td>
+                                <td>{{ $afcship->radioactiv }}</td>
+                                <td>
+                                    <!-- Tombol edit yang berwarna kuning -->
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{ route('afcship.edit', $afcship->id) }}"
+                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="alert alert-warning mt-4" role="alert">
+                Belum ada data Additional for Chinese shipment yang ditambahkan.
+            </div>
+        @endif
+
+        {{-- ua --}}
+        <h4>Ultimate Analysis (adb)</h4>
+        @if ($uas->isNotEmpty())
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered text-center table-hover">
+                    <thead class="thead-dark thead-custom">
+                        <tr>
+                            <th colspan="7">Ultimate Analysis (adb)</th>
+                            <th rowspan="2">HGI</th>
+                            <th rowspan="2">MHC/EQM</th>
+
+                            <th rowspan="4">Actions</th>
+                        </tr>
+
+                        <tr>
+                            <th>M</th>
+                            <th>Ac</th>
+                            <th>C</th>
+                            <th>H</th>
+                            <th>N</th>
+                            <th>S</th>
+                            <th>O</th>
+                            
+
+                        </tr>
+                        <tr>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>°C</th>
+                            <th>Index</th>
+                            <th>%</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($uas as $ua)
+                            <tr>
+                             
+                                <td>{{ $ua->m }}</td>
+                                <td>{{ $ua->ac }}</td>
+                                <td>{{ $ua->c }}</td>
+                                <td>{{ $ua->h }}</td>
+                                <td>{{ $ua->n }}</td>
+                                <td>{{ $ua->s }}</td>
+                                <td>{{ $ua->o }}</td>
+                                <td>{{ $ua->index }}</td>
+                                <td>{{ $ua->persen }}</td>
+                                <td>
+                                    <!-- Tombol edit yang berwarna kuning -->
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{ route('ua.edit', $ua->id) }}"
+                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="alert alert-warning mt-4" role="alert">
+                Belum ada data Ultimate Analysis (adb) yang ditambahkan.
+            </div>
+        @endif
+
+        {{-- sa --}}
+        <h4>Size Analysis</h4>
+        @if ($uas->isNotEmpty())
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered text-center table-hover">
+                    <thead class="thead-dark thead-custom">
+                        <tr>
+                            <th colspan="18">Size Analysis</th>
+                            {{-- <th colspan="2">TOTAL %</th> <!-- Gabungan kolom TOTAL % --> --}}
+                            <th rowspan="4">Actions</th>
+                        </tr>
+
+                        <tr>
+
+                            <th>70_mm</th>
+                            <th>50_mm</th>
+                            <th>50_315_mm</th>
+                            <th>315_224_mm</th>
+                            <th>315_16_mm</th>
+                            <th>224_112_mm</th>
+                            <th>112_63_mm</th>
+                            <th>8_mm</th>
+                            <th>164_75_mm</th>
+                            <th>63_475_mm</th>
+                            <th>475_2_mm</th>
+                            <th>2_1_mm</th>
+                            <th>1_05_mm</th>
+                            <th>05_mm</th>
+                            <th>TOTAL %</th> 
+                            <th>size1</th>
+                            <th>size2</th>
+                            <th>050_mm_persen</th>
+                            <th>070_mm_persen</th>
+
+                        </tr>
+                        <tr>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($sas as $sa)
+                            <tr>
+                            
+                                {{-- <td>{{ $sa->70_mm }}</td>
+                                <td>{{ $sa->50_mm }}</td>
+                                <td>{{ $sa->50_315_mm }}</td>
+                                <td>{{ $sa->315_224_mm }}</td>
+                                <td>{{ $sa->315_16_mm }}</td>
+                                <td>{{ $sa->224_112_mm }}</td>
+                                <td>{{ $sa->112_63_mm }}</td>
+                                <td>{{ $sa->8_mm }}</td>
+                                <td>{{ $sa->164_75_mm }}</td>
+                                <td>{{ $sa->63_475_mm }}</td>
+                                <td>{{ $sa->475_2_mm }}</td>
+                                <td>{{ $sa->2_1_mm }}</td>
+                                <td>{{ $sa->1_05_mm }}</td>
+                                <td>{{ $sa->05_mm }}</td>
+                                <td>{{ $sa->total }}</td>
+                                <td>{{ $sa->size1 }}</td>
+                                <td>{{ $sa->size2 }}</td>
+                                <td>{{ $sa->050_mm_persen }}</td>
+                                <td>{{ $sa->070_mm_persen }}</td>
+                                <td> --}}
+                                    <!-- Tombol edit yang berwarna kuning -->
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{ route('ua.edit', $sa->id) }}"
+                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="alert alert-warning mt-4" role="alert">
+                Belum ada data Ultimate Analysis (adb) yang ditambahkan.
             </div>
         @endif
 

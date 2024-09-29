@@ -54,10 +54,18 @@ class AshftController extends Controller
             'shipment_id' => 'required|exists:shipments,id', // Pastikan validasi sesuai
             'activity_id' => 'required|exists:activities,id', // Pastikan validasi sesuai
         ]);
+<<<<<<< HEAD
+=======
+         // Simpan data ke session
+         session()->put('ash_analysis_data', $validatedData);
+         $validatedData['shipment_id'] =  $request->input('shipment_id');
+         $validatedData['activity_id'] =   $request->input('activity_id');
+>>>>>>> 91b7d024dcc829abddf36a5196bdb93945d0d2f6
 
         // Buat data Ashft baru
         Ashft::create($validatedData);
 
+<<<<<<< HEAD
         return redirect()->route('activities.show', $request->input('activity_id'))
             ->with('success', 'Data berhasil ditambahkan.');
     }
@@ -77,3 +85,37 @@ class AshftController extends Controller
     //     return view('activities.show', compact('activity', 'ashfts', 'shipments', 'roas','coas','ashanls'));
     // }
 }
+=======
+        return redirect()->route('tems.create', ['activity' => $request->input('activity_id'),
+        'shipment' => $request->input('shipment_id')])
+            ->with('success', 'Data berhasil ditambahkan.');
+    }
+    public function edit(Ashft $ashft)
+    {
+        $activity = $ashft->activity; // Mendapatkan aktivitas terkait dari ROA
+        $shipment = $ashft->shipment; // Mendapatkan shipment terkait dari ROA
+        $id = session('id'); // Atau ambil ID dari sumber lain
+        return view('ashfts.edit', compact('ashft',  'activity', 'shipment', 'id'));
+    }
+    
+    public function update(Request $request, Ashft $ashft)
+    {
+        $validatedData = $request->validate([
+            'idt' => 'required|numeric',
+            'st' => 'required|numeric',
+            'ht' => 'required|numeric',
+            'ft' => 'required|numeric',
+            'idt1' => 'required|numeric',
+            'st1' => 'required|numeric',
+            'ht1' => 'required|numeric',
+            'ft1' => 'required|numeric',
+            'shipment_id' => 'required|exists:shipments,id', // Pastikan validasi sesuai
+            'activity_id' => 'required|exists:activities,id', // Pastikan validasi sesuai
+        ]);
+
+        $ashft->update($validatedData);
+
+        return redirect()->route('activities.show', $ashft->activity_id)->with('success', 'Ash Analysis berhasil diperbarui.');
+    }
+}
+>>>>>>> 91b7d024dcc829abddf36a5196bdb93945d0d2f6
