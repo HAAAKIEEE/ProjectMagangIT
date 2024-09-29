@@ -474,25 +474,11 @@
                                 <td>{{ $ashft->ht1 }}</td>
                                 <td>{{ $ashft->ft1 }}</td>
                                 <td>
-<<<<<<< HEAD
-                                    <!-- Add action buttons here -->
-                                    <a href="{{ route('ashfts.create', ['activity' => $activity->id, 'shipment' => $shipment->id]) }}" class="btn btn-primary">Create Ashft</a>
-                                    <a href="{{ route('ashfts.edit', [ 'activity' => $activity->id,'shipment' => $shipment->id ,'ashft'=>$ashft->id] ) }}"
-                                        class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="{{ route('ashfts.destroy', $ashft->id) }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
-                                    </form>
-=======
                                     <!-- Tombol edit yang berwarna kuning -->
                                     <div class="d-flex justify-content-center align-items-center">
                                         <a href="{{ route('ashfts.edit', $ashft->id) }}"
                                             class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
                                     </div>
->>>>>>> 91b7d024dcc829abddf36a5196bdb93945d0d2f6
                                 </td>
                             </tr>
                         @endforeach
@@ -691,7 +677,7 @@
                 <table class="table table-bordered text-center table-hover">
                     <thead class="thead-dark thead-custom">
                         <tr>
-                            <th colspan="18">Size Analysis</th>
+                            <th colspan="19">Size Analysis</th>
                             {{-- <th colspan="2">TOTAL %</th> <!-- Gabungan kolom TOTAL % --> --}}
                             <th rowspan="4">Actions</th>
                         </tr>
@@ -734,34 +720,37 @@
                             <th>%</th>
                             <th>%</th>
                             <th>%</th>
-                            
-
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($sas as $sa)
                             <tr>
-                            
-                                {{-- <td>{{ $sa->70_mm }}</td>
-                                <td>{{ $sa->50_mm }}</td>
-                                <td>{{ $sa->50_315_mm }}</td>
-                                <td>{{ $sa->315_224_mm }}</td>
-                                <td>{{ $sa->315_16_mm }}</td>
-                                <td>{{ $sa->224_112_mm }}</td>
-                                <td>{{ $sa->112_63_mm }}</td>
-                                <td>{{ $sa->8_mm }}</td>
-                                <td>{{ $sa->164_75_mm }}</td>
-                                <td>{{ $sa->63_475_mm }}</td>
-                                <td>{{ $sa->475_2_mm }}</td>
-                                <td>{{ $sa->2_1_mm }}</td>
-                                <td>{{ $sa->1_05_mm }}</td>
-                                <td>{{ $sa->05_mm }}</td>
-                                <td>{{ $sa->total }}</td>
-                                <td>{{ $sa->size1 }}</td>
-                                <td>{{ $sa->size2 }}</td>
-                                <td>{{ $sa->050_mm_persen }}</td>
-                                <td>{{ $sa->070_mm_persen }}</td>
-                                <td> --}}
+                                <td>{{ $sa->{'70_mm'} }}</td>
+                                <td>{{ $sa->{'50_mm'} }}</td>
+                                <td>{{ $sa->{'50_315_mm'} }}</td>
+                                <td>{{ $sa->{'315_224_mm'} }}</td>
+                                <td>{{ $sa->{'315_16_mm'} }}</td>
+                                <td>{{ $sa->{'224_112_mm'} }}</td>
+                                <td>{{ $sa->{'112_63_mm'} }}</td>
+                                <td>{{ $sa->{'8_mm'} }}</td>
+                                <td>{{ $sa->{'164_75_mm'} }}</td>
+                                <td>{{ $sa->{'63_475_mm'} }}</td>
+                                <td>{{ $sa->{'475_2_mm'} }}</td>
+                                <td>{{ $sa->{'2_1_mm'} }}</td>
+                                <td>{{ $sa->{'1_05_mm'} }}</td>
+                                <td>{{ $sa->{'05_mm'} }}</td>
+                                <td>{{ $sa->{'total'} }}</td>
+                                <td>{{ $sa->{'size1'} }}</td>
+                                <td>{{ $sa->{'size2'} }}</td>
+                                <td>{{ $sa->{'050_mm_persen'} }}</td>
+                                <td>{{ $sa->{'070_mm_persen'} }}</td>
+                                
+                                <td>
                                     <!-- Tombol edit yang berwarna kuning -->
                                     <div class="d-flex justify-content-center align-items-center">
                                         <a href="{{ route('ua.edit', $sa->id) }}"

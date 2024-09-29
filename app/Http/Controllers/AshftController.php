@@ -54,38 +54,14 @@ class AshftController extends Controller
             'shipment_id' => 'required|exists:shipments,id', // Pastikan validasi sesuai
             'activity_id' => 'required|exists:activities,id', // Pastikan validasi sesuai
         ]);
-<<<<<<< HEAD
-=======
          // Simpan data ke session
          session()->put('ash_analysis_data', $validatedData);
          $validatedData['shipment_id'] =  $request->input('shipment_id');
          $validatedData['activity_id'] =   $request->input('activity_id');
->>>>>>> 91b7d024dcc829abddf36a5196bdb93945d0d2f6
 
         // Buat data Ashft baru
         Ashft::create($validatedData);
 
-<<<<<<< HEAD
-        return redirect()->route('activities.show', $request->input('activity_id'))
-            ->with('success', 'Data berhasil ditambahkan.');
-    }
-
-
-    // public function show($id)
-    // {
-    //     $activity = Activity::with('ashfts')->find($id); // Mengambil activity beserta ashfts
-    //     if (!$activity) {
-    //         return redirect()->route('activities.index')->with('error', 'Activity tidak ditemukan.');
-    //     }
-    //     $shipments = Shipment::all(); // Ambil shipments berdasarkan activity_id
-    //     $roas = ROA::all();
-    //     $coas = Coa::all();
-    //     $ashanls = Ashanls::all();
-    //     $ashfts = $activity->ashfts ?? collect(); // Pastikan $ashfts adalah koleksi, meskipun kosong
-    //     return view('activities.show', compact('activity', 'ashfts', 'shipments', 'roas','coas','ashanls'));
-    // }
-}
-=======
         return redirect()->route('tems.create', ['activity' => $request->input('activity_id'),
         'shipment' => $request->input('shipment_id')])
             ->with('success', 'Data berhasil ditambahkan.');
@@ -118,4 +94,3 @@ class AshftController extends Controller
         return redirect()->route('activities.show', $ashft->activity_id)->with('success', 'Ash Analysis berhasil diperbarui.');
     }
 }
->>>>>>> 91b7d024dcc829abddf36a5196bdb93945d0d2f6

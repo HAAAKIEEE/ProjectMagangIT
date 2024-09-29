@@ -57,9 +57,12 @@ class UaController extends Controller
     $validatedData['shipment_id'] =  $request->input('shipment_id');
     $validatedData['activity_id'] =   $request->input('activity_id');
     Ua::create($validatedData);
-    return redirect()->route('activities.show', ['activity' => $request->input('activity_id'),
+    return redirect()->route('sa.create', ['activity' => $request->input('activity_id'),
     'shipment' => $request->input('shipment_id')])
         ->with('success', 'Data berhasil disimpan.');
+    // return redirect()->route('activities.show', ['activity' => $request->input('activity_id'),
+    // 'shipment' => $request->input('shipment_id')])
+    //     ->with('success', 'Data berhasil disimpan.');
     }
 
     /**

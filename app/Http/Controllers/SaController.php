@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Sa;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 
 class SaController extends Controller
@@ -25,7 +27,7 @@ class SaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Activity $activity, Shipment $shipment)
     {
         return view("sas.create", compact('activity', 'shipment'));
         //
@@ -39,6 +41,7 @@ class SaController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validatedData = $request->validate([
             '70_mm' => 'required|string|max:255',
             '50_mm' => 'required|string|max:255',
@@ -64,10 +67,10 @@ class SaController extends Controller
     $validatedData['shipment_id'] =  $request->input('shipment_id');
     $validatedData['activity_id'] =   $request->input('activity_id');
     Sa::create($validatedData);
+
     return redirect()->route('activities.show', ['activity' => $request->input('activity_id'),
     'shipment' => $request->input('shipment_id')])
         ->with('success', 'Data berhasil disimpan.');
-        //
     }
 
     /**

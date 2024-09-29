@@ -137,8 +137,9 @@ Route::put('/uas/{uas}', [UaController::class, 'update'])->name('ua_update');
 Route::post('/ua', [UaController::class, 'store'])->name('ua_store');
 
 // sas 
-Route::get('/activities/{activity}/shipments/{shipment}/sa/create', [UaController::class, 'create'])->name('sa.create');
+Route::get('/activities/{activity}/shipments/{shipment}/sa/create', [SaController::class, 'create'])->name('sa.create');
+Route::post('/activities/{activity}/shipments/{shipment}/sa', [SaController::class, 'store'])->name('sa_store');
+
 Route::get('/sas/{sas}/edit', [SaController::class, 'edit'])->name('ua.edit');
 Route::put('/sas/{sas}', [SaController::class, 'update'])->name('ua_update');
-Route::post('/sa', [SaController::class, 'store'])->name('sa_store');
-Route::get('/sa', [SaController::class, 'create'])->name('sa_create');
+// Route::get('/sa', [SaController::class, 'create'])->name('sa_create');
