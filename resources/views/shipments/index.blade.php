@@ -6,6 +6,7 @@
     <div class="mb-3">
         <a href="{{ route('shipments.create') }}" class="btn btn-primary">Tambah Shipment</a>
         <a href="{{ route('export') }}" class="btn btn-success">Download Excel</a>
+        <a href="{{ route('upload.file') }}" class="btn btn-info">Upload File</a> <!-- Tambahkan tombol Upload File di sini -->
     </div>
 
     @if(session('success'))

@@ -13,6 +13,7 @@
                     <a href="{{ route('shipments.create', $activity->id) }}" class="btn btn-primary mr-2">Tambah Data
                         {{ \Carbon\Carbon::parse($activity->activity_date)->format('F') }}</a>
                     <a href="{{ route('export', $activity->id) }}" class="btn btn-success">Download Excel</a>
+                    <a href="{{ route('shipments.create', $activity->id) }}" class="btn btn-primary mr-2" style="background-color: rgb(10, 0, 109);">Upload File</a>
                 </div>
             </div>
             <form method="GET" action="{{ route('activities.show', $activity->id) }}"
@@ -677,7 +678,7 @@
                 <table class="table table-bordered text-center table-hover">
                     <thead class="thead-dark thead-custom">
                         <tr>
-                            <th colspan="18">Size Analysis</th>
+                            <th colspan="19">Size Analysis</th>
                             {{-- <th colspan="2">TOTAL %</th> <!-- Gabungan kolom TOTAL % --> --}}
                             <th rowspan="4">Actions</th>
                         </tr>
@@ -720,37 +721,40 @@
                             <th>%</th>
                             <th>%</th>
                             <th>%</th>
-                            
-
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
+                            <th>%</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($sas as $sa)
                             <tr>
-                            
-                                {{-- <td>{{ $sa->70_mm }}</td>
-                                <td>{{ $sa->50_mm }}</td>
-                                <td>{{ $sa->50_315_mm }}</td>
-                                <td>{{ $sa->315_224_mm }}</td>
-                                <td>{{ $sa->315_16_mm }}</td>
-                                <td>{{ $sa->224_112_mm }}</td>
-                                <td>{{ $sa->112_63_mm }}</td>
-                                <td>{{ $sa->8_mm }}</td>
-                                <td>{{ $sa->164_75_mm }}</td>
-                                <td>{{ $sa->63_475_mm }}</td>
-                                <td>{{ $sa->475_2_mm }}</td>
-                                <td>{{ $sa->2_1_mm }}</td>
-                                <td>{{ $sa->1_05_mm }}</td>
-                                <td>{{ $sa->05_mm }}</td>
-                                <td>{{ $sa->total }}</td>
-                                <td>{{ $sa->size1 }}</td>
-                                <td>{{ $sa->size2 }}</td>
-                                <td>{{ $sa->050_mm_persen }}</td>
-                                <td>{{ $sa->070_mm_persen }}</td>
-                                <td> --}}
+                                <td>{{ $sa->{'70_mm'} }}</td>
+                                <td>{{ $sa->{'50_mm'} }}</td>
+                                <td>{{ $sa->{'50_315_mm'} }}</td>
+                                <td>{{ $sa->{'315_224_mm'} }}</td>
+                                <td>{{ $sa->{'315_16_mm'} }}</td>
+                                <td>{{ $sa->{'224_112_mm'} }}</td>
+                                <td>{{ $sa->{'112_63_mm'} }}</td>
+                                <td>{{ $sa->{'8_mm'} }}</td>
+                                <td>{{ $sa->{'164_75_mm'} }}</td>
+                                <td>{{ $sa->{'63_475_mm'} }}</td>
+                                <td>{{ $sa->{'475_2_mm'} }}</td>
+                                <td>{{ $sa->{'2_1_mm'} }}</td>
+                                <td>{{ $sa->{'1_05_mm'} }}</td>
+                                <td>{{ $sa->{'05_mm'} }}</td>
+                                <td>{{ $sa->{'total'} }}</td>
+                                <td>{{ $sa->{'size1'} }}</td>
+                                <td>{{ $sa->{'size2'} }}</td>
+                                <td>{{ $sa->{'050_mm_persen'} }}</td>
+                                <td>{{ $sa->{'070_mm_persen'} }}</td>
+                                
+                                <td>
                                     <!-- Tombol edit yang berwarna kuning -->
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <a href="{{ route('ua.edit', $sa->id) }}"
+                                        <a href="{{ route('sa.edit', $sa->id) }}"
                                             class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
                                     </div>
                                 </td>

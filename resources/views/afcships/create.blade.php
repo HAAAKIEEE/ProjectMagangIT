@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Tambah Trace Element Major</h1>
+    <h1>Tambah Additional for Chinese shipment</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">

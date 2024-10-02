@@ -13,6 +13,7 @@ class Sa extends Model
     {
         return $this->belongsTo(Activity::class);
     }
+    
     public function shipment()
     {
         return $this->belongsTo(Shipment::class);
