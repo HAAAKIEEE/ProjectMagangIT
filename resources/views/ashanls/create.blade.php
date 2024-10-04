@@ -51,7 +51,7 @@
         </style>
         <div class="form-group">
             <label for="cal">Cal/g</label>
-            <input type="number" class="form-control" id="cal" name="cal" placeholder="Masukkan cal/g" required>
+            <input type="number" class="form-control" id="cal" name="cal" placeholder="Masukkan cal/g" step="0.01" required>
         </div>
         <div class="form-group">
             <label for="si">SiO2</label>

@@ -148,8 +148,9 @@ Route::middleware('auth')->group(function () {
     // sas 
     Route::get('/activities/{activity}/shipments/{shipment}/sa/create', [SaController::class, 'create'])->name('sa.create');
     Route::post('/activities/{activity}/shipments/{shipment}/sa', [SaController::class, 'store'])->name('sa_store');
+    Route::resource('sas', SaController::class);
 
-    Route::get('/sas/{sas}/edit', [SaController::class, 'edit'])->name('ua.edit');
-    Route::put('/sas/{sas}', [SaController::class, 'update'])->name('ua_update');
+    Route::get('/sas/{sas}/edit', [SaController::class, 'edit'])->name('sa.edit');
+    Route::put('/sas/{sa}', [SaController::class, 'update'])->name('sas.update');
     // Route::get('/sa', [SaController::class, 'create'])->name('sa_create');
 });

@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -48,11 +49,11 @@
 
             <div class="form-group">
                 <label for="tm">TM</label>
-                <input type="text" class="form-control" id="tm" name="tm" placeholder="Masukkan TM" required>
+                <input type="text" class="form-control" id="tm" name="tm" placeholder="Masukkan TM" step="0.01" required>
             </div>
             <div class="form-group">
                 <label for="im">IM</label>
-                <input type="number" class="form-control" id="im" name="im" placeholder="Masukkan IM" required>
+                <input type="number" class="form-control" id="im" name="im" placeholder="Masukkan IM" step="0.01" required>
             </div>
 
             <div class="form-row-inline">
