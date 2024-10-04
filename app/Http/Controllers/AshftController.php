@@ -13,6 +13,21 @@ use App\Models\ROA;
 class AshftController extends Controller
 {
 
+    public function export()
+    {
+        // Ambil semua data dari tabel ashfts
+        $ashfts = Ashft::all();
+
+        // Kirim data ke view export
+        return view('export', ['ashfts' => $ashfts]);
+    }
+                                                // bagian baru ditambahkan untuk excel    
+    public function index()                         
+    {
+        $coas = Coa::with('activity')->get();
+        return view('ashfts.index', compact('ashfts'));
+    }
+
     // AshFusionTemperatureController.php
 
     public function create(Activity $activity, Shipment $shipment)
@@ -27,7 +42,7 @@ class AshftController extends Controller
 
         $id = session('id'); // Atau ambil ID dari sumber lain
         // Menampilkan form untuk membuat ROA baru
-        return view('ashfts.create', compact('activity', 'shipment', 'id','data'));
+        return view('ashfts.create', compact('activity', 'shipment', 'id', 'data'));
 
         // return view('ashfts.create', [
         //     'activity' => $activity,
@@ -35,8 +50,6 @@ class AshftController extends Controller
         //     'data' => $data // Kirim data ke view
         // ]);
     }
-
-
 
     // app/Http/Controllers/AshftController.php
 
@@ -54,16 +67,18 @@ class AshftController extends Controller
             'shipment_id' => 'required|exists:shipments,id', // Pastikan validasi sesuai
             'activity_id' => 'required|exists:activities,id', // Pastikan validasi sesuai
         ]);
-         // Simpan data ke session
-         session()->put('ash_analysis_data', $validatedData);
-         $validatedData['shipment_id'] =  $request->input('shipment_id');
-         $validatedData['activity_id'] =   $request->input('activity_id');
+        // Simpan data ke session
+        session()->put('ash_analysis_data', $validatedData);
+        $validatedData['shipment_id'] =  $request->input('shipment_id');
+        $validatedData['activity_id'] =   $request->input('activity_id');
 
         // Buat data Ashft baru
         Ashft::create($validatedData);
 
-        return redirect()->route('tems.create', ['activity' => $request->input('activity_id'),
-        'shipment' => $request->input('shipment_id')])
+        return redirect()->route('tems.create', [
+            'activity' => $request->input('activity_id'),
+            'shipment' => $request->input('shipment_id')
+        ])
             ->with('success', 'Data berhasil ditambahkan.');
     }
     public function edit(Ashft $ashft)
@@ -73,7 +88,7 @@ class AshftController extends Controller
         $id = session('id'); // Atau ambil ID dari sumber lain
         return view('ashfts.edit', compact('ashft',  'activity', 'shipment', 'id'));
     }
-    
+
     public function update(Request $request, Ashft $ashft)
     {
         $validatedData = $request->validate([

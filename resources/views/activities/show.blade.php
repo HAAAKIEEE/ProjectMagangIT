@@ -13,7 +13,8 @@
                     <a href="{{ route('shipments.create', $activity->id) }}" class="btn btn-primary mr-2">Tambah Data
                         {{ \Carbon\Carbon::parse($activity->activity_date)->format('F') }}</a>
                     <a href="{{ route('export', $activity->id) }}" class="btn btn-success">Download Excel</a>
-                    <a href="{{ route('shipments.create', $activity->id) }}" class="btn btn-primary mr-2" style="background-color: rgb(10, 0, 109);">Upload File</a>
+                    <a href="{{ route('shipments.create', $activity->id) }}" class="btn btn-primary mr-2"
+                        style="background-color: rgb(10, 0, 109);">Upload File</a>
                 </div>
             </div>
             <form method="GET" action="{{ route('activities.show', $activity->id) }}"
@@ -536,8 +537,8 @@
                                 <td>
                                     <!-- Tombol edit yang berwarna kuning -->
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <a href="{{ route('tem.edit', $tem->id) }}"
-                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                        <a href="{{ route('tem.edit', $tem->id) }}" class="btn btn-warning btn-sm mr-3"
+                                            style="margin-right: 10px;">Edit</a>
                                     </div>
                                 </td>
                             </tr>
@@ -624,7 +625,7 @@
                             <th>N</th>
                             <th>S</th>
                             <th>O</th>
-                            
+
 
                         </tr>
                         <tr>
@@ -643,7 +644,7 @@
                     <tbody>
                         @foreach ($uas as $ua)
                             <tr>
-                             
+
                                 <td>{{ $ua->m }}</td>
                                 <td>{{ $ua->ac }}</td>
                                 <td>{{ $ua->c }}</td>
@@ -656,8 +657,8 @@
                                 <td>
                                     <!-- Tombol edit yang berwarna kuning -->
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <a href="{{ route('ua.edit', $ua->id) }}"
-                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                        <a href="{{ route('ua.edit', $ua->id) }}" class="btn btn-warning btn-sm mr-3"
+                                            style="margin-right: 10px;">Edit</a>
                                     </div>
                                 </td>
                             </tr>
@@ -699,7 +700,7 @@
                             <th>2_1_mm</th>
                             <th>1_05_mm</th>
                             <th>05_mm</th>
-                            <th>TOTAL %</th> 
+                            <th>TOTAL %</th>
                             <th>size1</th>
                             <th>size2</th>
                             <th>050_mm_persen</th>
@@ -731,31 +732,32 @@
                     <tbody>
                         @foreach ($sas as $sa)
                             <tr>
-                                <td>{{ $sa->{'70_mm'} }}</td>
-                                <td>{{ $sa->{'50_mm'} }}</td>
-                                <td>{{ $sa->{'50_315_mm'} }}</td>
-                                <td>{{ $sa->{'315_224_mm'} }}</td>
-                                <td>{{ $sa->{'315_16_mm'} }}</td>
-                                <td>{{ $sa->{'224_112_mm'} }}</td>
-                                <td>{{ $sa->{'112_63_mm'} }}</td>
-                                <td>{{ $sa->{'8_mm'} }}</td>
-                                <td>{{ $sa->{'164_75_mm'} }}</td>
-                                <td>{{ $sa->{'63_475_mm'} }}</td>
-                                <td>{{ $sa->{'475_2_mm'} }}</td>
-                                <td>{{ $sa->{'2_1_mm'} }}</td>
-                                <td>{{ $sa->{'1_05_mm'} }}</td>
-                                <td>{{ $sa->{'05_mm'} }}</td>
-                                <td>{{ $sa->{'total'} }}</td>
-                                <td>{{ $sa->{'size1'} }}</td>
-                                <td>{{ $sa->{'size2'} }}</td>
-                                <td>{{ $sa->{'050_mm_persen'} }}</td>
-                                <td>{{ $sa->{'070_mm_persen'} }}</td>
-                                
+                                <td>{{ $sa->mm_70 }}</td>
+                                <td>{{ $sa->mm_50 }}</td>
+                                <td>{{ $sa->mm_50_315 }}</td>
+                                <td>{{ $sa->mm_315_224 }}</td>
+                                <td>{{ $sa->mm_315_16 }}</td>
+                                <td>{{ $sa->mm_224_112 }}</td>
+                                <td>{{ $sa->mm_112_63 }}</td>
+                                <td>{{ $sa->mm_8 }}</td>
+                                <td>{{ $sa->mm_164_75 }}</td>
+                                <td>{{ $sa->mm_63_475 }}</td>
+                                <td>{{ $sa->mm_475_2 }}</td>
+                                <td>{{ $sa->mm_2_1 }}</td>
+                                <td>{{ $sa->mm_1_05 }}</td>
+                                <td>{{ $sa->mm_05 }}</td>
+                                <td>{{ $sa->total }}</td>
+                                <td>{{ $sa->size1 }}</td>
+                                <td>{{ $sa->size2 }}</td>
+                                <td>{{ $sa->mm_050_persen }}</td>
+                                <td>{{ $sa->mm_070_persen }}</td>
+
+
                                 <td>
                                     <!-- Tombol edit yang berwarna kuning -->
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <a href="{{ route('sa.edit', $sa->id) }}"
-                                            class="btn btn-warning btn-sm mr-3" style="margin-right: 10px;">Edit</a>
+                                        <a href="{{ route('sa.edit', $sa->id) }}" class="btn btn-warning btn-sm mr-3"
+                                            style="margin-right: 10px;">Edit</a>
                                     </div>
                                 </td>
                             </tr>
@@ -765,7 +767,7 @@
             </div>
         @else
             <div class="alert alert-warning mt-4" role="alert">
-                Belum ada data Ultimate Analysis (adb) yang ditambahkan.
+                Belum ada data Size Analysis yang ditambahkan.
             </div>
         @endif
 
