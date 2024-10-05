@@ -42,49 +42,66 @@
         </div>
 
 
+      <!-- Shipments Table -->
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Shipments
+    </div>
+    <div class="card-body">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <h1>Shipments</h1>
+        
+        <!-- Filter Form -->
+        <form method="GET" action="{{ route('dashboard.index') }}">
+            <label for="activity_filter">Filter by Activity:</label>
+            <select name="activity_filter" id="activity_filter" onchange="this.form.submit()">
+                <option value="" disabled selected>Select an option</option>
+                @foreach ($activity as $activiti)
+                    <option value="{{ $activiti->name }}" {{ request('activity_filter') == $activiti->name ? 'selected' : '' }}>
+                        {{ $activiti->name }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
+        
         <!-- Shipments Table -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                Shipments
-            </div>
-            <div class="card-body">
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                <h1>Shipments</h1>
-                <table class="table table-bordered mt-3">
-                    <thead>
-                        <tr>
-                            <th>GAR</th>
-                            <th>E/D</th>
-                            <th>BUYER</th>
-                            <th>MV</th>
-                            <th>BG</th>
-                            <th>Arrival Date</th>
-                            <th>Departure Date</th>
-                            <th>Duration (days)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($shipments as $shipment)
-                            <tr>
-                                <td>{{ $shipment->gar }}</td>
-                                <td>{{ $shipment->type }}</td>
-                                <td>{{ $shipment->company ? $shipment->company->name : 'N/A' }}</td>
-                                <td>{{ $shipment->mv ? $shipment->mv : '-' }}</td>
-                                <td>{{ $shipment->bg ? $shipment->bg : '-' }}</td>
-                                <td>{{ $shipment->arrival_date }}</td>
-                                <td>{{ $shipment->departure_date }}</td>
-                                <td>{{ $shipment->duration }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>GAR</th>
+                    <th>E/D</th>
+                    <th>BUYER</th>
+                    <th>MV</th>
+                    <th>BG</th>
+                    <th>Arrival Date</th>
+                    <th>Departure Date</th>
+                    <th>Duration (days)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($shipments as $shipment)
+                    <tr>
+                        <td>{{ $shipment->gar }}</td>
+                        <td>{{ $shipment->type }}</td>
+                        <td>{{ $shipment->company ? $shipment->company->name : 'N/A' }}</td>
+                        <td>{{ $shipment->mv ? $shipment->mv : '-' }}</td>
+                        <td>{{ $shipment->bg ? $shipment->bg : '-' }}</td>
+                        <td>{{ $shipment->arrival_date }}</td>
+                        <td>{{ $shipment->departure_date }}</td>
+                        <td>{{ $shipment->duration }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
         <!-- Existing Charts -->
         <div class="row">
