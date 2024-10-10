@@ -41,11 +41,13 @@ Route::middleware('guest')->group(function () {
     })->name('login');
     // Menangani login form submission
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-});
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    });
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group(function () {
     // Dashboard routes
+    // baru
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboards', [DashboardController::class, 'index'])->name('dashboard.index');
     // Shipment routes
     Route::resource('shipments', ShipmentController::class)->except(['show']);

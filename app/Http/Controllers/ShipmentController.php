@@ -154,4 +154,19 @@ class ShipmentController extends Controller
 
         return response()->json($companies);
     }
+
+    // kode baru yang di tambahkan untuk filter shipment dasb
+    public function dashboard(Request $request)
+    {
+        $query = Shipment::query();
+
+        // Filter data berdasarkan bulan jika bulan dipilih
+        if ($request->has('month') && $request->month != '') {
+            $query->whereMonth('arrival_date', $request->month);
+        }
+
+        $shipments = $query->with(['company'])->get();
+
+        return view('dashboard', compact('shipments'));
+    }
 }
