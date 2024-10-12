@@ -49,8 +49,10 @@ Route::middleware('guest')->group(function () {
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group(function () {
     // Dashboard routes
+    // baru
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboards', [DashboardController::class, 'index'])->name('dashboard.index');
     // Shipment routes
     Route::resource('shipments', ShipmentController::class)->except(['show']);
