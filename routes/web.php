@@ -39,8 +39,13 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
         return view('login');
     })->name('login');
+    Route::get('/register', function () {
+        return view('register');
+    })->name('register');
     // Menangani login form submission
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
