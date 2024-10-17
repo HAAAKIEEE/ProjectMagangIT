@@ -17,6 +17,8 @@
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+{{-- <p>Total Domestic Companies: {{ $totalCompanies }}</p> --}}
+
     <table class="table">
         <thead>
             <tr>
@@ -47,9 +49,12 @@
             @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{-- {{ $companies->links()}} --}}
+    </div>
 </div>
 
-<!-- Font Awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{{-- <!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> --}}
 
 @endsection

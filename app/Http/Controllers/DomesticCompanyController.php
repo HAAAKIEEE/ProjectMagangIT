@@ -11,7 +11,9 @@ class DomesticCompanyController extends Controller
     public function index()
     {
         $companies = DomesticCompany::all();
-        return view('domestic_companies.index', compact('companies'));
+        $totalCompanies = DomesticCompany::count();
+
+        return view('domestic_companies.index', compact('companies','totalCompanies'));
     }
 
     public function create()
