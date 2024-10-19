@@ -44,18 +44,27 @@ Route::middleware('guest')->group(function () {
     })->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 
-   
+
     // Menangani login form submission
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-    });
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     // Dashboard routes
     // baru
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboards', [DashboardController::class, 'index'])->name('dashboard.index');
     // Shipment routes
+    Route::resource('shipments', ShipmentController::class);
+
+    // Route untuk halaman upload file Excel
+    Route::get('upload/file', [ShipmentController::class, 'uploadFile'])->name('shipments.upload');
+    Route::post('upload/file', [ShipmentController::class, 'importFile'])->name('shipments.import');
+
+    // Route untuk dashboard dengan filter bulan
+    Route::get('dashboard', [ShipmentController::class, 'dashboard'])->name('dashboard');
+
     Route::resource('shipments', ShipmentController::class)->except(['show']);
     Route::get('/shipments/create', [ShipmentController::class, 'create'])->name('shipments.create');
     Route::get('shipments/{activity}/edit', [ShipmentController::class, 'edit'])->name('shipments.edit');
