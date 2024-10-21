@@ -18,14 +18,16 @@
         <a href="{{ route('dashboard.index') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 40px; margin-right: 10px;">
         </a>
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div id="datetime-display" style="color: #d3d3d3;"></div>
         </form>
 
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="#!">Settings</a></li>
                     <li><a class="dropdown-item" href="#!">Activity Log</a></li>
@@ -35,11 +37,16 @@
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="dropdown-item" >Logout</button>
+                            <button type="submit" class="dropdown-item">Logout</button>
                         </form>
                     </li>
-                </ul>
-            </li>
+                    <form method="POST" action="{{ route('register.submit') }}">
+                        @csrf
+                        <button type="submit" class="dropdown-item">Register</button>
+                    </form>
+                    </li>
+        </ul>
+        </li>
         </ul>
     </nav>
     <div id="layoutSidenav">
@@ -52,18 +59,23 @@
                             <i class="fas fa-tachometer-alt"></i> Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
                             Menu
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseShipments" aria-expanded="false" aria-controls="collapseShipments">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseShipments" aria-expanded="false"
+                                    aria-controls="collapseShipments">
                                     <i></i> Shipment
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
-                                <div class="collapse" id="collapseShipments" aria-labelledby="headingTwo" data-bs-parent="#collapseLayouts">
+                                <div class="collapse" id="collapseShipments" aria-labelledby="headingTwo"
+                                    data-bs-parent="#collapseLayouts">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="{{ route('activities.create') }}">
                                             <i></i> Add New
@@ -73,11 +85,13 @@
                                         </a>
                                     </nav>
                                 </div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseMvs" aria-expanded="false" aria-controls="collapseMvs">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseMvs" aria-expanded="false" aria-controls="collapseMvs">
                                     <i></i> MV
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
-                                <div class="collapse" id="collapseMvs" aria-labelledby="headingTwo" data-bs-parent="#collapseLayouts">
+                                <div class="collapse" id="collapseMvs" aria-labelledby="headingTwo"
+                                    data-bs-parent="#collapseLayouts">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="#">
                                             <i></i> Add New
@@ -89,12 +103,13 @@
                                 </div>
                             </nav>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small text-center">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" style="width: 50px; height: auto; margin-right: 10px;">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo"
+                            style="width: 50px; height: auto; margin-right: 10px;">
                         © copyright 2024
                     </div>
                 </div>
@@ -110,7 +125,8 @@
 
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
