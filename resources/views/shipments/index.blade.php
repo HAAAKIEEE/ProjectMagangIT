@@ -6,8 +6,18 @@
     <div class="mb-3">
         <a href="{{ route('shipments.create') }}" class="btn btn-primary">Tambah Shipment</a>
         <a href="{{ route('export') }}" class="btn btn-success">Download Excel</a>
-        <a href="{{ route('upload.file') }}" class="btn btn-info">Upload File</a> <!-- Tambahkan tombol Upload File di sini -->
+        {{-- <a href="{{ route('upload.file') }}" class="btn btn-info">Upload File</a> <!-- Tambahkan tombol Upload File di sini --> --}}
     </div>
+    
+    <form action="{{ route('upload.file') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group">
+            <label for="file">Pilih file untuk diunggah:</label>
+            <input type="file" name="file" id="file" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-info">Upload File</button>
+    </form>
+    
 
     @if(session('success'))
     <div class="alert alert-success">

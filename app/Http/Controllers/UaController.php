@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Coa;
 use App\Models\Shipment;
 use App\Models\Ua;
 use Illuminate\Http\Request;
@@ -29,7 +30,10 @@ class UaController extends Controller
      */
     public function create(Activity $activity, Shipment $shipment)
     {
-        return view("uas.create", compact('activity', 'shipment'));
+        $coa = Coa::where('shipment_id', $shipment->id)
+        ->where('activity_id', $activity->id)
+        ->first();
+        return view("uas.create", compact('activity', 'shipment','coa'));
         //
     }
 
@@ -54,6 +58,8 @@ class UaController extends Controller
             'persen' => 'nullable|string|max:255',
         //
     ]);
+ 
+
     $validatedData['shipment_id'] =  $request->input('shipment_id');
     $validatedData['activity_id'] =   $request->input('activity_id');
     Ua::create($validatedData);

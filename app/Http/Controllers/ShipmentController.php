@@ -8,6 +8,8 @@ use App\Models\Surveyor;
 use App\Models\InternationalCompany;
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class ShipmentController extends Controller
 {
@@ -25,6 +27,29 @@ class ShipmentController extends Controller
 
         return view('shipments.create', compact('surveyors', 'activity', 'id'));
     }
+
+    public function showUploadForm()
+    {
+        return view('shipments.upload');
+    }
+
+    // Tangani proses upload dan import file
+    public function importFile(Request $request)
+    {
+        // Validasi file yang diupload
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx|max:2048', // maksimal file 2MB
+        ]);
+
+        // Simpan file yang diupload sementara ke dalam storage
+        $file = $request->file('file')->store('temp');
+
+        // Import data dari file Excel menggunakan ShipmentImport
+        Excel::import(new ShipmentController, storage_path('app/' . $file));
+
+        return redirect()->route('shipments.index')->with('success', 'Data shipment berhasil diupload dan diimport.');
+    }
+
 
 
     public function store(Request $request, Activity $activity)

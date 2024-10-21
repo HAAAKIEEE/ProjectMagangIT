@@ -39,7 +39,7 @@ class InternationalCompanyController extends Controller
     {
         $seederPath = database_path('seeders/InternationalCompaniesSeeder.php');
         $seederContent = File::get($seederPath);
-
+ 
         if (strpos($seederContent, $companyName) === false) {
             $newEntry = "\n            '" . addslashes($companyName) . "',";
             $seederContent = str_replace(

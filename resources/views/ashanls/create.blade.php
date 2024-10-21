@@ -51,7 +51,7 @@
         </style>
         <div class="form-group">
             <label for="cal">Cal/g</label>
-            <input type="number" class="form-control" id="cal" name="cal" placeholder="Masukkan cal/g" step="0.01" required>
+            <input type="number" class="form-control" id="cal" name="cal" placeholder="Masukkan cal/g" step="any" required>
         </div>
         <div class="form-group">
             <label for="si">SiO2</label>
@@ -90,7 +90,7 @@
 
         <div class="form-group">
             <label for="ti">TiO2</label>
-            <input type="number" class="form-control" id="ti" name="ti" placeholder="Masukkan TiO2" required oninput="calculateValues()">
+            <input type="number" class="form-control" id="ti" name="ti" placeholder="Masukkan TiO2" step="any" required oninput="calculateValues()">
         </div>
 
         <h2>CV</h2>

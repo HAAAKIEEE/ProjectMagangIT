@@ -92,8 +92,30 @@
         
         <div class="form-group">
             <label for="total">Total</label>
-            <input type="text" class="form-control" id="total" name="total" placeholder="Masukkan Total" value="{{ old('total') }}" required>
+            <input type="text" class="form-control" id="total" name="total" placeholder="Total akan otomatis dihitung" readonly>
         </div>
+
+        <script>
+            document.addEventListener('input', function () {
+                let total = 0;
+        
+                // Mengambil nilai dari setiap input field ukuran
+                let mm70 = parseFloat(document.getElementById('mm_70').value) || 0;
+                let mm50 = parseFloat(document.getElementById('mm_50').value) || 0;
+                let mm50_315 = parseFloat(document.getElementById('mm_50_315').value) || 0;
+        
+                // Logika perhitungan sesuai rumus Excel
+                // Jika ada nilai lebih besar dari 0 pada +50 mm dan -50+31.5 mm, hitung total
+                if (mm50 > 0 || mm50_315 > 0) {
+                    total = 100 - mm50;  // Total dihitung dengan mengurangi nilai +50 mm dari 100
+                } else {
+                    total = 0;  // Jika tidak ada nilai > 0, total = 0
+                }
+        
+                // Tampilkan hasil perhitungan pada input Total
+                document.getElementById('total').value = total;
+            });
+        </script>
         
         <div class="form-group">
             <label for="size1">Size 1</label>
